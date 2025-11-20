@@ -1,5 +1,5 @@
 # Virtual environments
-factored_env/
+.venv
 
 # Python
 __pycache__/
