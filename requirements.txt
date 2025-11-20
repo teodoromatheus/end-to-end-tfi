@@ -1,0 +1,23 @@
+# GTFS Realtime
+gtfs-realtime-bindings==1.0.0
+
+# Web Framework
+flask==2.3.3
+flask_cors==4.0.0
+waitress==2.1.2
+
+# Data Processing
+pandas>=2.0.0
+requests>=2.31.0
+
+# Configuration & Storage
+pyyaml==6.0.1
+redis==5.0.0
+
+# Example Functions
+# Dependencies required to run files in the example_functions directory
+gtfs-realtime-bindings==1.0.0  # Required for gtfs.py (used by example_functions.py)
+pandas>=2.0.0  # Required for example_functions.py and data_utils.py
+requests>=2.31.0  # Required for data_utils.py
+redis==5.0.0  # Required for store.py (used by gtfs.py)
+# Note: All other dependencies (datetime, typing, collections, pathlib, etc.) are built-in Python modules
