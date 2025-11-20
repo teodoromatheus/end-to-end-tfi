@@ -1,5 +1,5 @@
 # Virtual environments
-factored_env/
+.venv
 
 # Python
 __pycache__/
@@ -7,6 +7,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
+local_settings.py
 
 # Distribution / packaging
 build/
