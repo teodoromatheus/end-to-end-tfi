@@ -5,6 +5,16 @@ from pathlib import Path
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 
 def load_agency() -> pd.DataFrame:
+    """
+    Load GTFS agency information from agency.txt.
+
+    Returns:
+        pd.DataFrame: DataFrame containing agency metadata such as ID, name, URL, and timezone.
+
+    Example:
+        >>> agency_df = load_agency()
+        >>> agency_df.head()
+    """
     return pd.read_csv(
         DATA_DIR / "agency.txt",
         sep=",",
@@ -19,6 +29,16 @@ def load_agency() -> pd.DataFrame:
 
 
 def load_calendar_dates() -> pd.DataFrame:
+    """
+    Load GTFS calendar exception dates from calendar_dates.txt.
+
+    Returns:
+        pd.DataFrame: DataFrame containing service exceptions with parsed dates.
+
+    Example:
+        >>> cal_dates = load_calendar_dates()
+        >>> cal_dates.head()
+    """
     return pd.read_csv(
         DATA_DIR / "calendar_dates.txt",
         sep=",",
@@ -34,6 +54,16 @@ def load_calendar_dates() -> pd.DataFrame:
 
 
 def load_calendar() -> pd.DataFrame:
+    """
+    Load GTFS service availability from calendar.txt.
+
+    Returns:
+        pd.DataFrame: DataFrame containing service schedules, including weekdays and valid date ranges.
+
+    Example:
+        >>> calendar_df = load_calendar()
+        >>> calendar_df.head()
+    """
     return pd.read_csv(
         DATA_DIR / "calendar.txt",
         sep=",",
@@ -56,6 +86,16 @@ def load_calendar() -> pd.DataFrame:
 
 
 def load_routes() -> pd.DataFrame:
+    """
+    Load GTFS route information from routes.txt.
+
+    Returns:
+        pd.DataFrame: DataFrame containing details about all transit routes.
+
+    Example:
+        >>> routes = load_routes()
+        >>> routes[['route_id', 'route_short_name']].head()
+    """
     return pd.read_csv(
         DATA_DIR / "routes.txt",
         sep=",",
@@ -75,6 +115,17 @@ def load_routes() -> pd.DataFrame:
 
 
 def load_shapes() -> pd.DataFrame:
+    """
+    Load GTFS route shapes from shapes.txt.
+
+    Returns:
+        pd.DataFrame: DataFrame containing shape points with latitude, longitude,
+                      sequence order, and distance traveled.
+
+    Example:
+        >>> shapes = load_shapes()
+        >>> shapes.sort_values("shape_pt_sequence").head()
+    """
     return pd.read_csv(
         DATA_DIR / "shapes.txt",
         sep=",",
@@ -90,6 +141,17 @@ def load_shapes() -> pd.DataFrame:
 
 
 def load_stop_times() -> pd.DataFrame:
+    """
+    Load GTFS stop-time sequences from stop_times.txt.
+
+    Returns:
+        pd.DataFrame: DataFrame containing stop sequences, pickup/drop-off types,
+                      and associated trip IDs.
+
+    Example:
+        >>> stop_times = load_stop_times()
+        >>> stop_times[['trip_id', 'stop_id']].head()
+    """
     return pd.read_csv(
         DATA_DIR / "stop_times.txt",
         sep=",",
@@ -107,6 +169,16 @@ def load_stop_times() -> pd.DataFrame:
 
 
 def load_stops() -> pd.DataFrame:
+    """
+    Load GTFS stop metadata from stops.txt.
+
+    Returns:
+        pd.DataFrame: DataFrame containing stop coordinates, names, codes, and related fields.
+
+    Example:
+        >>> stops = load_stops()
+        >>> stops[['stop_id', 'stop_name']].head()
+    """
     return pd.read_csv(
         DATA_DIR / "stops.txt",
         sep=",",
@@ -127,6 +199,16 @@ def load_stops() -> pd.DataFrame:
 
 
 def load_trips() -> pd.DataFrame:
+    """
+    Load GTFS trip information from trips.txt.
+
+    Returns:
+        pd.DataFrame: DataFrame containing trip IDs, associated routes, shapes, headsigns, and more.
+
+    Example:
+        >>> trips = load_trips()
+        >>> trips[['trip_id', 'route_id']].head()
+    """
     return pd.read_csv(
         DATA_DIR / "trips.txt",
         sep=",",
@@ -146,12 +228,17 @@ def load_trips() -> pd.DataFrame:
 
 def load_all_data() -> dict[str, pd.DataFrame]:
     """
-    Convenience function to load all GTFS text files at once.
-    Returns a dict of DataFrames.
+    Load all GTFS files into a dictionary of DataFrames.
 
-    You can access the dataframe by its name:
-        data_loaded = load_gtfs_data()
-        df_agency = data_loaded["agency"]
+    Returns:
+        dict[str, pd.DataFrame]: A dictionary mapping GTFS component names
+        (e.g., "routes", "stops", "trips") to their respective DataFrames.
+
+    Example:
+        >>> data = load_all_data()
+        >>> data.keys()
+        dict_keys(['agency', 'calendar_dates', 'calendar', 'routes',
+                   'shapes', 'stop_times', 'stops', 'trips'])
     """
     return {
         "agency": load_agency(),
